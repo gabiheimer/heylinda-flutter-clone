@@ -1,4 +1,5 @@
 import 'package:app/screens/NotFoundScreen.dart';
+import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: PredefinedColors.primary,
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: PredefinedColors.text),
+        ),
       ),
       home: const NotFoundScreen(),
     );
