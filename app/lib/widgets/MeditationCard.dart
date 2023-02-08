@@ -2,18 +2,22 @@ import 'package:app/data/meditations.dart';
 import 'package:app/widgets/DownloadButton.dart';
 import 'package:flutter/material.dart';
 
-class PopularCard extends StatelessWidget {
+class MeditationCard extends StatelessWidget {
   final Meditation item;
+  final bool isPopular;
 
-  const PopularCard({super.key, required this.item});
+  const MeditationCard({super.key, required this.item, this.isPopular = false});
 
   @override
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).textTheme.bodyText1?.color;
     final primaryColor = Theme.of(context).primaryColor;
+    final double imageHeight = isPopular ? 250 : 135;
+    const double cardWidth = 250;
 
-    return SizedBox(
-      width: 250,
+    return Container(
+      width: cardWidth,
+      margin: const EdgeInsets.only(right: 10),
       child: Card(
         elevation: 1,
         child: InkWell(
@@ -22,9 +26,8 @@ class PopularCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                width: 250,
-                height: 250,
-                margin: const EdgeInsets.only(right: 10),
+                width: cardWidth,
+                height: imageHeight,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(item.image),
