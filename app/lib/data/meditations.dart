@@ -40,7 +40,7 @@ class MeditationRepository {
       subtitle: 'Busy At Work',
       time: 5,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/1.mp3',
-      image: 'images/meditate1.jpg',
+      image: 'assets/images/meditate1.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e02e',
@@ -50,7 +50,7 @@ class MeditationRepository {
       subtitle: 'Just Breath',
       time: 5,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/2.mp3',
-      image: 'images/meditate2.jpg',
+      image: 'assets/images/meditate2.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e02f',
@@ -60,7 +60,7 @@ class MeditationRepository {
       track: 3,
       time: 5,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/3.mp3',
-      image: 'images/meditate5.jpg',
+      image: 'assets/images/meditate5.jpg',
     ),
   ];
 
@@ -73,7 +73,7 @@ class MeditationRepository {
       subtitle: 'Release Anxiety',
       time: 10,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/4.mp3',
-      image: 'images/meditate3.jpg',
+      image: 'assets/images/meditate3.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e031',
@@ -83,7 +83,7 @@ class MeditationRepository {
       track: 7,
       time: 11,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/7.mp3',
-      image: 'images/meditate4.jpg',
+      image: 'assets/images/meditate4.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e032',
@@ -93,7 +93,7 @@ class MeditationRepository {
       track: 8,
       time: 11,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/8.mp3',
-      image: 'images/rocks.jpg',
+      image: 'assets/images/rocks.jpg',
     ),
   ];
 
@@ -106,7 +106,7 @@ class MeditationRepository {
       track: 5,
       time: 8,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/5.mp3',
-      image: 'images/tea.jpg',
+      image: 'assets/images/tea.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e034',
@@ -116,7 +116,7 @@ class MeditationRepository {
       track: 6,
       time: 28,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/6.mp3',
-      image: 'images/sleep.jpg',
+      image: 'assets/images/sleep.jpg',
     ),
     Meditation(
       id: 'ff171f80-5960-41e7-965c-1f9bcf31e035',
@@ -126,7 +126,7 @@ class MeditationRepository {
       subtitle: 'Drift Off To Sleep',
       time: 15,
       uri: 'https://goofy-ritchie-dd0c3d.netlify.app/meditations/12.mp3',
-      image: 'images/sleep2.jpg',
+      image: 'assets/images/sleep2.jpg',
     ),
   ];
 }

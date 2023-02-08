@@ -1,3 +1,4 @@
+import 'package:app/screens/Home/Home.dart';
 import 'package:app/screens/NotFoundScreen.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(color: PredefinedColors.text),
         ),
       ),
-      home: const NotFoundScreen(),
+      home: const Home(),
     );
   }
 }

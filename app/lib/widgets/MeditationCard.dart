@@ -1,4 +1,5 @@
 import 'package:app/data/meditations.dart';
+import 'package:app/styles/Colors.dart';
 import 'package:app/widgets/DownloadButton.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,6 @@ class MeditationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textColor = Theme.of(context).textTheme.bodyText1?.color;
-    final primaryColor = Theme.of(context).primaryColor;
     final double imageHeight = isPopular ? 250 : 135;
     const double cardWidth = 250;
 
@@ -60,9 +60,9 @@ class MeditationCard extends StatelessWidget {
                       children: [
                         Text(
                           "${item.time} minutes",
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: primaryColor,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: PredefinedColors.purple900,
                           ),
                         ),
                         const DownloadButton(),
