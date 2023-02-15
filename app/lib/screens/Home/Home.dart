@@ -1,4 +1,5 @@
 import 'package:app/data/meditations.dart';
+import 'package:app/templates/ScreenTemplate.dart';
 import 'package:app/widgets/MeditationCard.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,8 @@ class Home extends StatelessWidget {
     const List<Meditation> favourites = [];
     final primaryColor = Theme.of(context).primaryColor;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: const Text('Home'),
-      ),
+    return ScreenTemplate(
+      title: "Home",
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 36, bottom: 36, left: 14),
         child: Column(

@@ -1,5 +1,6 @@
 import 'package:app/screens/Home/Home.dart';
 import 'package:app/screens/NotFoundScreen.dart';
+import 'package:app/screens/Settings/Settings.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
