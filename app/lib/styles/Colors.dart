@@ -5,4 +5,5 @@ class PredefinedColors {
   static const primary = Color(0xFF463FB0);
   static const purple900 = Color(0xFF4A5784);
   static const background = Color(0XFFF2F2F2);
+  static const gray900 = Color(0xFF333333);
 }
