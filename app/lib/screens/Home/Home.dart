@@ -1,5 +1,4 @@
 import 'package:app/data/meditations.dart';
-import 'package:app/templates/ScreenTemplate.dart';
 import 'package:app/widgets/MeditationCard.dart';
 import 'package:flutter/material.dart';
 
@@ -12,33 +11,30 @@ class Home extends StatelessWidget {
     const List<Meditation> favourites = [];
     final primaryColor = Theme.of(context).primaryColor;
 
-    return ScreenTemplate(
-      title: "Home",
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 36, bottom: 36, left: 14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _Section(
-              title: 'POPULAR',
-              meditations: MeditationRepository.popular,
-              isPopular: true,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(top: 36, bottom: 36, left: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _Section(
+            title: 'POPULAR',
+            meditations: MeditationRepository.popular,
+            isPopular: true,
+          ),
+          _Section(
+            title: 'ANXIETY',
+            meditations: MeditationRepository.anxiety,
+          ),
+          _Section(
+            title: 'SLEEP',
+            meditations: MeditationRepository.sleep,
+          ),
+          if (favourites.isNotEmpty)
+            const _Section(
+              title: 'FAVOURITE',
+              meditations: favourites,
             ),
-            _Section(
-              title: 'ANXIETY',
-              meditations: MeditationRepository.anxiety,
-            ),
-            _Section(
-              title: 'SLEEP',
-              meditations: MeditationRepository.sleep,
-            ),
-            if (favourites.isNotEmpty)
-              const _Section(
-                title: 'FAVOURITE',
-                meditations: favourites,
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }

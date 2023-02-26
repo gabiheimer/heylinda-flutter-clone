@@ -1,5 +1,4 @@
 import 'package:app/styles/Colors.dart';
-import 'package:app/templates/ScreenTemplate.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,35 +23,32 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTemplate(
-      title: "Settings",
-      body: Container(
-        color: PredefinedColors.background,
-        child: Column(
-          children: [
-            ListTile(
-              visualDensity: tileVisualDensity,
-              title: const Text("Clear Data"),
-              onTap: clearData,
-            ),
-            const Divider(),
-            ListTile(
-              visualDensity: tileVisualDensity,
-              title: const Text("Privacy Policy"),
-              onTap: openPrivacyPolicy,
-            ),
-            const Divider(),
-            ListTile(
-              visualDensity: tileVisualDensity,
-              title: const Text("About"),
-              onTap: () {
-                // TODO: link to about page
-                // Navigator.pushNamed(context, '/about');
-              },
-            ),
-            const Divider(),
-          ],
-        ),
+    return Container(
+      color: PredefinedColors.background,
+      child: Column(
+        children: [
+          ListTile(
+            visualDensity: tileVisualDensity,
+            title: const Text("Clear Data"),
+            onTap: clearData,
+          ),
+          const Divider(),
+          ListTile(
+            visualDensity: tileVisualDensity,
+            title: const Text("Privacy Policy"),
+            onTap: openPrivacyPolicy,
+          ),
+          const Divider(),
+          ListTile(
+            visualDensity: tileVisualDensity,
+            title: const Text("About"),
+            onTap: () {
+              // TODO: link to about page
+              // Navigator.pushNamed(context, '/about');
+            },
+          ),
+          const Divider(),
+        ],
       ),
     );
   }

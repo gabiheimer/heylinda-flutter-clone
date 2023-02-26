@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:app/screens/Stats/Calendar.dart';
 import 'package:app/styles/Colors.dart';
-import 'package:app/templates/ScreenTemplate.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/quotes.dart';
@@ -17,44 +16,41 @@ class Stats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTemplate(
-      title: "Stats",
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 36, bottom: 36, left: 14),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 130,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  _DataCard(
-                    icon: Icons.emoji_events_outlined,
-                    dataLabel: 'Current Streak',
-                    dataValue: '$streak day${streak == 1 ? '' : 's'}',
-                  ),
-                  _DataCard(
-                    icon: Icons.calendar_month,
-                    dataLabel: 'Total Sessions',
-                    dataValue:
-                        '$totalSessions session${totalSessions == 1 ? '' : 's'}',
-                  ),
-                  _DataCard(
-                    icon: Icons.access_time,
-                    dataLabel: 'Time Meditating',
-                    dataValue: listenedStat,
-                  ),
-                ],
-              ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(top: 36, bottom: 36, left: 14),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 130,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              children: [
+                _DataCard(
+                  icon: Icons.emoji_events_outlined,
+                  dataLabel: 'Current Streak',
+                  dataValue: '$streak day${streak == 1 ? '' : 's'}',
+                ),
+                _DataCard(
+                  icon: Icons.calendar_month,
+                  dataLabel: 'Total Sessions',
+                  dataValue:
+                      '$totalSessions session${totalSessions == 1 ? '' : 's'}',
+                ),
+                _DataCard(
+                  icon: Icons.access_time,
+                  dataLabel: 'Time Meditating',
+                  dataValue: listenedStat,
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Calendar(),
-            const _QuoteCard(),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const Calendar(),
+          const _QuoteCard(),
+        ],
       ),
     );
   }

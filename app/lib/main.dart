@@ -1,6 +1,8 @@
+import 'package:app/navigation/MainTabNavigator.dart';
 import 'package:app/screens/Home/Home.dart';
 import 'package:app/screens/NotFoundScreen.dart';
 import 'package:app/screens/Settings/Settings.dart';
+import 'package:app/screens/Stats/Stats.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(color: PredefinedColors.text),
         ),
       ),
-      home: const Home(),
+      home: const MainTabNavigator(),
     );
   }
 }
