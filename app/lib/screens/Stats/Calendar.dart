@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:app/screens/Stats/ManualEntry.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -42,6 +43,12 @@ class Calendar extends StatelessWidget {
             color: PredefinedColors.gray900,
           ),
         ),
+        onDaySelected: (selectedDay, focusedDay) async {
+          return await showDialog(
+            context: context,
+            builder: (context) => const ManualEntry(),
+          );
+        },
       ),
     );
   }
