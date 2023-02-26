@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:app/screens/Stats/Calendar.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:app/templates/ScreenTemplate.dart';
 import 'package:flutter/material.dart';
+
+import '../../data/quotes.dart';
 
 class Stats extends StatelessWidget {
   const Stats({super.key});
@@ -47,7 +51,8 @@ class Stats extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            const Calendar()
+            const Calendar(),
+            const _QuoteCard(),
           ],
         ),
       ),
@@ -96,6 +101,57 @@ class _DataCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _QuoteCard extends StatelessWidget {
+  const _QuoteCard({
+    super.key,
+  });
+
+  Quote get getQuote {
+    final quotes = QuoteRepository.quotes;
+
+    final int max = quotes.length - 1;
+    final int r = Random().nextInt(max);
+
+    return quotes[r];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final quote = getQuote;
+
+    return Container(
+      margin: const EdgeInsets.only(right: 10, bottom: 30),
+      child: Card(
+        margin: const EdgeInsets.all(0),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                quote.author,
+                style: const TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                quote.text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
