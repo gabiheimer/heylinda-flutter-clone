@@ -1,3 +1,4 @@
+import 'package:app/screens/Settings/About.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,10 +28,13 @@ class Settings extends StatelessWidget {
       color: PredefinedColors.background,
       child: Column(
         children: [
-          ListTile(
-            visualDensity: tileVisualDensity,
-            title: const Text("Clear Data"),
-            onTap: clearData,
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ListTile(
+              visualDensity: tileVisualDensity,
+              title: const Text("Clear Data"),
+              onTap: clearData,
+            ),
           ),
           const Divider(),
           ListTile(
@@ -43,8 +47,12 @@ class Settings extends StatelessWidget {
             visualDensity: tileVisualDensity,
             title: const Text("About"),
             onTap: () {
-              // TODO: link to about page
-              // Navigator.pushNamed(context, '/about');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => About(),
+                ),
+              );
             },
           ),
           const Divider(),
