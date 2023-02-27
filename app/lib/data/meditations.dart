@@ -129,4 +129,6 @@ class MeditationRepository {
       image: 'assets/images/sleep2.jpg',
     ),
   ];
+
+  static List<Meditation> meditations = [...popular, ...anxiety, ...sleep];
 }

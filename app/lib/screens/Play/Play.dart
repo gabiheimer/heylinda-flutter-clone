@@ -1,30 +1,56 @@
 import 'package:app/data/meditations.dart';
+import 'package:app/storage/Storage.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/Colors.dart';
 import '../../widgets/FavouriteButton.dart';
 import 'PlayerControls.dart';
 
-class Play extends StatelessWidget {
+class Play extends StatefulWidget {
   const Play({super.key, required this.meditation});
 
   final Meditation meditation;
 
-  // TODO: implement state
-  bool get isFavourited => true;
+  @override
+  State<Play> createState() => _PlayState();
+}
+
+class _PlayState extends State<Play> {
+  bool isFavourited = false;
+
+  void initStorage() async {
+    bool storageValue = await Storage.isFavourite(widget.meditation.id);
+    setState(() {
+      isFavourited = storageValue;
+    });
+  }
+
+  @override
+  void initState() {
+    initStorage();
+    super.initState();
+  }
 
   void onFavourite() {
-    // TODO: implement function
+    Storage.updateFavourites(widget.meditation.id);
+    setState(() {
+      isFavourited = !isFavourited;
+    });
   }
 
   // TODO: implement play audio functionality
   bool get isPlaying => true;
+
   String get positionTime => '00:00';
+
   String get durationTime => '02:15';
 
   void onPlay() {}
+
   void onPause() {}
+
   void onReplay() {}
+
   void onForward() {}
 
   @override
@@ -62,7 +88,7 @@ class Play extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: AssetImage(meditation.image),
+                          image: AssetImage(widget.meditation.image),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -71,7 +97,7 @@ class Play extends StatelessWidget {
                       height: 30,
                     ),
                     Text(
-                      meditation.title,
+                      widget.meditation.title,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -81,7 +107,7 @@ class Play extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                      meditation.subtitle,
+                      widget.meditation.subtitle,
                       style: const TextStyle(
                         fontSize: 16,
                       ),

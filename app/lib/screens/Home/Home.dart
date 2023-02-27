@@ -1,14 +1,42 @@
 import 'package:app/data/meditations.dart';
+import 'package:app/storage/Storage.dart';
 import 'package:app/widgets/MeditationCard.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  List<Meditation> favourites = [];
+
+  void initFavourites() async {
+    List<String> storedFavouritesIds = await Storage.getFavourites();
+    List<Meditation> storedFavourites = storedFavouritesIds
+        .map(
+          (id) => MeditationRepository.meditations
+              .where((meditation) => meditation.id == id),
+        )
+        .expand((element) => element)
+        .toList();
+
+    setState(() {
+      favourites = storedFavourites;
+    });
+  }
+
+  @override
+  void initState() {
+    initFavourites();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: add favourites funcionality
-    const List<Meditation> favourites = [];
     final primaryColor = Theme.of(context).primaryColor;
 
     return SingleChildScrollView(
@@ -30,7 +58,7 @@ class Home extends StatelessWidget {
             meditations: MeditationRepository.sleep,
           ),
           if (favourites.isNotEmpty)
-            const _Section(
+            _Section(
               title: 'FAVOURITE',
               meditations: favourites,
             ),
