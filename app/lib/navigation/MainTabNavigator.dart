@@ -59,7 +59,7 @@ class _MainTabNavigatorState extends State<MainTabNavigator> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
+            icon: Icon(Icons.calendar_month_outlined),
             label: 'Stats',
           ),
           BottomNavigationBarItem(
