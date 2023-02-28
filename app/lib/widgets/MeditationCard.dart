@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:app/data/meditations.dart';
 import 'package:app/screens/Play/Play.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:app/widgets/DownloadButton.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MeditationCard extends StatelessWidget {
   final Meditation item;
@@ -18,6 +22,31 @@ class MeditationCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<String> getFilePath(String meditationUri) async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final String filename = meditationUri.split('/').removeLast();
+    return '${directory.path}/$filename';
+  }
+
+  Future<bool> isMeditationDownloaded() async {
+    final String filePath = await getFilePath(item.uri);
+    return File(filePath).exists();
+  }
+
+  Future<void> saveMeditationAudio() async {
+    final String filePath = await getFilePath(item.uri);
+
+    final HttpClient httpClient = HttpClient();
+    final Uri uri = Uri.parse(item.uri);
+    final HttpClientRequest request = await httpClient.getUrl(uri);
+    final HttpClientResponse response = await request.close();
+    final List<int> bytes = await consolidateHttpClientResponseBytes(response);
+
+    // Save the file to disk
+    final File file = File(filePath);
+    await file.writeAsBytes(bytes);
   }
 
   @override
@@ -78,7 +107,10 @@ class MeditationCard extends StatelessWidget {
                               color: PredefinedColors.purple900,
                             ),
                           ),
-                          const DownloadButton(),
+                          DownloadButton(
+                            download: saveMeditationAudio,
+                            isInitiallyDownloaded: isMeditationDownloaded,
+                          ),
                         ],
                       ),
                     ],

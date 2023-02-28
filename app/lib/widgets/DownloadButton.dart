@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DownloadButton extends StatefulWidget {
-  const DownloadButton({super.key});
+  const DownloadButton(
+      {super.key, required this.download, required this.isInitiallyDownloaded});
+
+  final Future<void> Function() download;
+  final Future<bool> Function() isInitiallyDownloaded;
 
   @override
   State<DownloadButton> createState() => _DownloadButtonState();
@@ -11,15 +15,28 @@ class _DownloadButtonState extends State<DownloadButton> {
   bool downloaded = false;
   bool downloading = false;
 
-  void saveAudioFile() async {
-    // TODO: add save audio file functionality
+  void initDownloaded() async {
+    bool initiallyDownloaded = await widget.isInitiallyDownloaded();
+    setState(() {
+      downloaded = initiallyDownloaded;
+    });
+  }
+
+  @override
+  void initState() {
+    initDownloaded();
+    super.initState();
+  }
+
+  void onDownload() async {
+    if (downloaded) return;
 
     setState(() {
       downloaded = false;
       downloading = true;
     });
 
-    await Future.delayed(const Duration(seconds: 1));
+    await widget.download();
 
     setState(() {
       downloaded = true;
@@ -60,7 +77,7 @@ class _DownloadButtonState extends State<DownloadButton> {
             size: buttonSize,
             color: primary,
           ),
-          onPressed: saveAudioFile,
+          onPressed: onDownload,
         ),
       );
     }
