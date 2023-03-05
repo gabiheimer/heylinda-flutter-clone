@@ -16,7 +16,7 @@ class Stats extends StatefulWidget {
 
 class _StatsState extends State<Stats> {
   Set<DateTime> markedDates = {};
-  Map<DateTime, int> activity = {};
+  Map<DateTime, List<int>> activity = {};
   int streak = 0;
   int totalSessions = 0;
   String listenedStat = "0 minutes";
@@ -37,7 +37,10 @@ class _StatsState extends State<Stats> {
   String getListenedStat() {
     int totalMillis = activity.isEmpty
         ? 0
-        : activity.values.reduce((value, element) => value + element);
+        : activity.values
+            .expand((dayMeditatons) => dayMeditatons)
+            .reduce((accTime, sessionTime) => accTime + sessionTime);
+
     int minutes = (totalMillis / 60000).floor();
 
     int hours = (minutes / 60).floor();
@@ -53,12 +56,13 @@ class _StatsState extends State<Stats> {
   }
 
   Future<void> getCalendarData() async {
-    Map<DateTime, int> storedActivity = await Storage.getActivity();
+    Map<DateTime, List<int>> storedActivity = await Storage.getActivity();
     setState(() {
       activity = storedActivity;
       markedDates = activity.keys.toSet();
       streak = getStreak();
-      totalSessions = activity.length;
+      totalSessions =
+          activity.values.expand((dayMeditatons) => dayMeditatons).length;
       listenedStat = getListenedStat();
     });
   }
@@ -106,7 +110,6 @@ class _StatsState extends State<Stats> {
           Calendar(
             getCalendarData: getCalendarData,
             markedDates: markedDates,
-            activity: activity,
           ),
           const _QuoteCard(),
         ],

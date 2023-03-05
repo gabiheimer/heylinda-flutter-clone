@@ -9,12 +9,10 @@ class Calendar extends StatelessWidget {
     super.key,
     required this.getCalendarData,
     required this.markedDates,
-    required this.activity,
   });
 
   final Future<void> Function() getCalendarData;
   final Set<DateTime> markedDates;
-  final Map<DateTime, int> activity;
 
   @override
   Widget build(BuildContext context) {

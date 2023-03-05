@@ -64,36 +64,36 @@ class Storage {
     return _isInList(_favouritesKey, meditationId);
   }
 
-  static Future<Map<DateTime, int>> getActivity() async {
+  static Future<Map<DateTime, List<int>>> getActivity() async {
     String? activityJson = await _getString(_activityKey) ?? "{}";
     Map<String, dynamic> activitiesMap = jsonDecode(activityJson);
 
     return activitiesMap.map(
-      (key, value) => MapEntry(
+      (key, values) => MapEntry(
         _stringToDate(key),
-        int.parse(value),
+        values.cast<int>(),
       ),
     );
   }
 
-  static Future<Map<DateTime, int>> updateActivity(
+  static Future<Map<DateTime, List<int>>> updateActivity(
       DateTime date, int duration) async {
-    Map<DateTime, int> activity = await getActivity();
+    Map<DateTime, List<int>> activity = await getActivity();
 
-    if (duration == 0 && activity.containsKey(date)) {
-      activity.remove(date);
-    } else if (duration > 0) {
-      activity[date] = duration;
+    if (activity[date] == null) {
+      activity[date] = [];
     }
+    activity[date]?.add(duration);
 
-    Map<String, String> formattedActivity = activity.map(
+    Map<String, List<int>> formattedActivity = activity.map(
       (key, value) => MapEntry(
         _dateToString(key),
-        value.toString(),
+        value,
       ),
     );
 
     String activityJson = jsonEncode(formattedActivity);
+
     _setString(_activityKey, activityJson);
 
     return activity;
