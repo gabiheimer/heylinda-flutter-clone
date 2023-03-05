@@ -185,6 +185,7 @@ class _QuoteCard extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(right: 10, bottom: 30),
+      width: double.infinity,
       child: Card(
         margin: const EdgeInsets.all(0),
         child: Padding(
