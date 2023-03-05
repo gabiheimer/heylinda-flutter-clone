@@ -98,4 +98,9 @@ class Storage {
 
     return activity;
   }
+
+  static void clearData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
 }
