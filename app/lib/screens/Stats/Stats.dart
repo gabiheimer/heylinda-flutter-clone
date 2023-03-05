@@ -17,12 +17,27 @@ class Stats extends StatefulWidget {
 class _StatsState extends State<Stats> {
   Set<DateTime> markedDates = {};
   Map<DateTime, int> activity = {};
+  int streak = 0;
+
+  int getStreak() {
+    DateTime now = DateTime.now();
+    DateTime curDate = DateTime(now.year, now.month, now.day);
+    int curStreak = 0;
+
+    while (activity.containsKey(curDate)) {
+      curStreak++;
+      curDate = curDate.subtract(const Duration(days: 1));
+    }
+
+    return curStreak;
+  }
 
   Future<void> getCalendarData() async {
     Map<DateTime, int> storedActivity = await Storage.getActivity();
     setState(() {
       activity = storedActivity;
       markedDates = activity.keys.toSet();
+      streak = getStreak();
     });
   }
 
@@ -31,9 +46,6 @@ class _StatsState extends State<Stats> {
     getCalendarData();
     super.initState();
   }
-
-  // TODO: get data from storage
-  get streak => 1;
 
   get totalSessions => 1;
 
