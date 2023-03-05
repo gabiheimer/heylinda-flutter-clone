@@ -18,6 +18,7 @@ class _StatsState extends State<Stats> {
   Set<DateTime> markedDates = {};
   Map<DateTime, int> activity = {};
   int streak = 0;
+  int totalSessions = 0;
 
   int getStreak() {
     DateTime now = DateTime.now();
@@ -38,6 +39,7 @@ class _StatsState extends State<Stats> {
       activity = storedActivity;
       markedDates = activity.keys.toSet();
       streak = getStreak();
+      totalSessions = activity.length;
     });
   }
 
@@ -46,8 +48,6 @@ class _StatsState extends State<Stats> {
     getCalendarData();
     super.initState();
   }
-
-  get totalSessions => 1;
 
   get listenedStat => "0 minutes";
 
