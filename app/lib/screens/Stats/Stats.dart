@@ -19,6 +19,7 @@ class _StatsState extends State<Stats> {
   Map<DateTime, int> activity = {};
   int streak = 0;
   int totalSessions = 0;
+  String listenedStat = "0 minutes";
 
   int getStreak() {
     DateTime now = DateTime.now();
@@ -33,6 +34,23 @@ class _StatsState extends State<Stats> {
     return curStreak;
   }
 
+  String getListenedStat() {
+    int totalMillis =
+        activity.values.reduce((value, element) => value + element);
+    int minutes = (totalMillis / 60000).floor();
+
+    int hours = (minutes / 60).floor();
+    minutes = minutes % 60;
+
+    if (hours > 0 && minutes > 0) {
+      return '${hours}h ${minutes}m';
+    } else if (hours > 0) {
+      return '$hours hour${hours == 1 ? '' : 's'}';
+    } else {
+      return '$minutes min${minutes == 1 ? '' : 's'}';
+    }
+  }
+
   Future<void> getCalendarData() async {
     Map<DateTime, int> storedActivity = await Storage.getActivity();
     setState(() {
@@ -40,6 +58,7 @@ class _StatsState extends State<Stats> {
       markedDates = activity.keys.toSet();
       streak = getStreak();
       totalSessions = activity.length;
+      listenedStat = getListenedStat();
     });
   }
 
@@ -48,8 +67,6 @@ class _StatsState extends State<Stats> {
     getCalendarData();
     super.initState();
   }
-
-  get listenedStat => "0 minutes";
 
   @override
   Widget build(BuildContext context) {
