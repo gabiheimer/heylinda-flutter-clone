@@ -7,9 +7,14 @@ import '../../widgets/FavouriteButton.dart';
 import 'PlayerControls.dart';
 
 class Play extends StatefulWidget {
-  const Play({super.key, required this.meditation});
+  const Play({
+    super.key,
+    required this.meditation,
+    required this.updateFavourites,
+  });
 
   final Meditation meditation;
+  final void Function(Meditation) updateFavourites;
 
   @override
   State<Play> createState() => _PlayState();
@@ -35,6 +40,7 @@ class _PlayState extends State<Play> {
     Storage.updateFavourites(widget.meditation.id);
     setState(() {
       isFavourited = !isFavourited;
+      widget.updateFavourites(widget.meditation);
     });
   }
 

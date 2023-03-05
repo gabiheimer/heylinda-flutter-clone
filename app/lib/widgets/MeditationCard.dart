@@ -11,14 +11,21 @@ import 'package:path_provider/path_provider.dart';
 class MeditationCard extends StatelessWidget {
   final Meditation item;
   final bool isPopular;
+  final void Function(Meditation) updateFavourites;
 
-  const MeditationCard({super.key, required this.item, this.isPopular = false});
+  const MeditationCard({
+    super.key,
+    required this.item,
+    this.isPopular = false,
+    required this.updateFavourites,
+  });
 
   void onTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Play(
           meditation: item,
+          updateFavourites: updateFavourites,
         ),
       ),
     );

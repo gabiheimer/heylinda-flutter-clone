@@ -28,6 +28,16 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void updateFavourites(Meditation meditation) {
+    setState(() {
+      if (favourites.contains(meditation)) {
+        favourites.remove(meditation);
+      } else {
+        favourites.add(meditation);
+      }
+    });
+  }
+
   @override
   void initState() {
     initFavourites();
@@ -48,19 +58,23 @@ class _HomeState extends State<Home> {
             title: 'POPULAR',
             meditations: MeditationRepository.popular,
             isPopular: true,
+            updateFavourites: updateFavourites,
           ),
           _Section(
             title: 'ANXIETY',
             meditations: MeditationRepository.anxiety,
+            updateFavourites: updateFavourites,
           ),
           _Section(
             title: 'SLEEP',
             meditations: MeditationRepository.sleep,
+            updateFavourites: updateFavourites,
           ),
           if (favourites.isNotEmpty)
             _Section(
               title: 'FAVOURITE',
               meditations: favourites,
+              updateFavourites: updateFavourites,
             ),
         ],
       ),
@@ -72,12 +86,14 @@ class _Section extends StatelessWidget {
   final String title;
   final List<Meditation> meditations;
   final bool isPopular;
+  final void Function(Meditation) updateFavourites;
 
   const _Section({
     Key? key,
     required this.title,
     required this.meditations,
     this.isPopular = false,
+    required this.updateFavourites,
   }) : super(key: key);
 
   @override
@@ -106,6 +122,7 @@ class _Section extends StatelessWidget {
                 return MeditationCard(
                   item: meditations[index],
                   isPopular: isPopular,
+                  updateFavourites: updateFavourites,
                 );
               },
             ),
