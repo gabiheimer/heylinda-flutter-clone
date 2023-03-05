@@ -1,17 +1,42 @@
 import 'dart:math';
 
 import 'package:app/screens/Stats/Calendar.dart';
+import 'package:app/storage/Storage.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/quotes.dart';
 
-class Stats extends StatelessWidget {
+class Stats extends StatefulWidget {
   const Stats({super.key});
+
+  @override
+  State<Stats> createState() => _StatsState();
+}
+
+class _StatsState extends State<Stats> {
+  Set<DateTime> markedDates = {};
+  Map<DateTime, int> activity = {};
+
+  Future<void> getCalendarData() async {
+    Map<DateTime, int> storedActivity = await Storage.getActivity();
+    setState(() {
+      activity = storedActivity;
+      markedDates = activity.keys.toSet();
+    });
+  }
+
+  @override
+  void initState() {
+    getCalendarData();
+    super.initState();
+  }
 
   // TODO: get data from storage
   get streak => 1;
+
   get totalSessions => 1;
+
   get listenedStat => "0 minutes";
 
   @override
@@ -48,7 +73,11 @@ class Stats extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const Calendar(),
+          Calendar(
+            getCalendarData: getCalendarData,
+            markedDates: markedDates,
+            activity: activity,
+          ),
           const _QuoteCard(),
         ],
       ),
