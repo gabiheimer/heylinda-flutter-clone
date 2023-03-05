@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app/data/meditations.dart';
 import 'package:app/screens/Play/Play.dart';
 import 'package:app/styles/Colors.dart';
+import 'package:app/utils/meditationUtils.dart';
 import 'package:app/widgets/DownloadButton.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,19 +32,13 @@ class MeditationCard extends StatelessWidget {
     );
   }
 
-  Future<String> getFilePath(String meditationUri) async {
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final String filename = meditationUri.split('/').removeLast();
-    return '${directory.path}/$filename';
-  }
-
   Future<bool> isMeditationDownloaded() async {
-    final String filePath = await getFilePath(item.uri);
+    final String filePath = await getMeditationFilePath(item.uri);
     return File(filePath).exists();
   }
 
   Future<void> saveMeditationAudio() async {
-    final String filePath = await getFilePath(item.uri);
+    final String filePath = await getMeditationFilePath(item.uri);
 
     final HttpClient httpClient = HttpClient();
     final Uri uri = Uri.parse(item.uri);
