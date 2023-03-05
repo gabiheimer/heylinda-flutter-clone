@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:app/screens/Stats/ManualEntry.dart';
 import 'package:app/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -61,25 +60,6 @@ class Calendar extends StatelessWidget {
             color: PredefinedColors.gray900,
           ),
         ),
-        onDaySelected: (selectedDay, focusedDay) async {
-          if (selectedDay.millisecondsSinceEpoch >
-              DateTime.now().millisecondsSinceEpoch) return;
-
-          final formattedSelectedDay = DateTime(
-            selectedDay.year,
-            selectedDay.month,
-            selectedDay.day,
-          );
-
-          return await showDialog(
-            context: context,
-            builder: (context) => ManualEntry(
-              selectedDay: formattedSelectedDay,
-              getCalendarData: getCalendarData,
-              activity: activity,
-            ),
-          );
-        },
         selectedDayPredicate: (day) {
           final formattedDay = DateTime(day.year, day.month, day.day);
           return markedDates.contains(formattedDay);
