@@ -35,8 +35,9 @@ class _StatsState extends State<Stats> {
   }
 
   String getListenedStat() {
-    int totalMillis =
-        activity.values.reduce((value, element) => value + element);
+    int totalMillis = activity.isEmpty
+        ? 0
+        : activity.values.reduce((value, element) => value + element);
     int minutes = (totalMillis / 60000).floor();
 
     int hours = (minutes / 60).floor();
