@@ -64,62 +64,59 @@ class MeditationCard extends StatelessWidget {
         onTap: () => onTap(context),
         child: Card(
           elevation: 1,
-          child: InkWell(
-            // TODO: add navigation onTap
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: cardWidth,
-                  height: imageHeight,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(item.image),
-                      fit: BoxFit.cover,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: cardWidth,
+                height: imageHeight,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(item.image),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      item.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textColor,
-                        ),
+                    const SizedBox(height: 8),
+                    Text(
+                      item.subtitle,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.normal,
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        item.subtitle,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${item.time} minutes",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: PredefinedColors.purple900,
-                            ),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${item.time} minutes",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: PredefinedColors.purple900,
                           ),
-                          DownloadButton(
-                            download: saveMeditationAudio,
-                            isInitiallyDownloaded: isMeditationDownloaded,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        DownloadButton(
+                          download: saveMeditationAudio,
+                          isInitiallyDownloaded: isMeditationDownloaded,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

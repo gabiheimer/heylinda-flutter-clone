@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:app/data/meditations.dart';
+import 'package:app/screens/Completed/Completed.dart';
 import 'package:app/storage/Storage.dart';
 import 'package:app/utils/meditationUtils.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -40,6 +41,24 @@ class _PlayState extends State<Play> {
     });
   }
 
+  void navigateToCompleted(int totalSessions) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Completed(
+          totalSessions: totalSessions,
+        ),
+      ),
+    );
+  }
+
+  void updateActivity() async {
+    final DateTime now = DateTime.now();
+    final DateTime today = DateTime(now.year, now.month, now.day);
+    final activity = await Storage.updateActivity(today, durationMillis);
+    navigateToCompleted(activity.length);
+  }
+
   void initMeditationAudio() async {
     audioPlayer = AudioPlayer();
     String filePath = await getMeditationFilePath(widget.meditation.uri);
@@ -65,9 +84,7 @@ class _PlayState extends State<Play> {
         isPlaying = false;
       });
 
-      final DateTime now = DateTime.now();
-      final DateTime today = DateTime(now.year, now.month, now.day);
-      Storage.updateActivity(today, durationMillis);
+      updateActivity();
     });
   }
 
