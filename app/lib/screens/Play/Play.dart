@@ -56,7 +56,7 @@ class _PlayState extends State<Play> {
     final DateTime now = DateTime.now();
     final DateTime today = DateTime(now.year, now.month, now.day);
     final activity = await Storage.updateActivity(today, durationMillis);
-    navigateToCompleted(activity.length);
+    navigateToCompleted(activity.values.expand((session) => session).length);
   }
 
   void initMeditationAudio() async {

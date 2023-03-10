@@ -15,12 +15,10 @@ class _HomeState extends State<Home> {
 
   void initFavourites() async {
     List<String> storedFavouritesIds = await Storage.getFavourites();
-    List<Meditation> storedFavourites = storedFavouritesIds
-        .map(
-          (id) => MeditationRepository.meditations
-              .where((meditation) => meditation.id == id),
+    List<Meditation> storedFavourites = MeditationRepository.meditations
+        .where(
+          (meditation) => storedFavouritesIds.contains(meditation.id),
         )
-        .expand((element) => element)
         .toList();
 
     setState(() {
