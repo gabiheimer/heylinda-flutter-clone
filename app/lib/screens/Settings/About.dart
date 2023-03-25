@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:app/data/meditations.dart';
+import 'package:app/utils/meditationUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +22,10 @@ class _AboutState extends State<About> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  void deleteMeditation() async {
+    deleteSpecificMeditation(MeditationRepository.anxiety[0].uri);
   }
 
   VisualDensity get tileVisualDensity => const VisualDensity(vertical: -4);
@@ -65,6 +71,7 @@ class _AboutState extends State<About> {
               onTap: openAboutUs,
             ),
             const Divider(),
+            TextButton(onPressed: deleteMeditation, child: Text("delete")),
           ],
         ),
       ),

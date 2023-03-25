@@ -9,3 +9,10 @@ Future<String> getMeditationFilePath(String meditationUri) async {
   final String filename = meditationUri.split('/').removeLast();
   return '${directory.path}/$filename';
 }
+
+void deleteSpecificMeditation(String meditationUri) async {
+  final Directory directory = await getApplicationDocumentsDirectory();
+  final String filename = meditationUri.split('/').removeLast();
+  final File file = File('${directory.path}/$filename');
+  await file.delete();
+}
